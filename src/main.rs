@@ -1,15 +1,20 @@
 mod scanner;
+mod token;
+mod parser;
+mod ast;
 
-use scanner::{Token, Scanner};
+use token::{Token, tokenize};
+use parser::Parser;
 
 fn main() {
-    let mut scanner = Scanner::new("a + b;");
+    let source = r#"
+        let x: int = 5 + 3 * 2;
+    "#;
 
-    loop {
-        let token = scanner.scan();
-        if let Token::EOF = token {
-            break;
-        }
-        println!("{:?}", token);
-    }
+    let tokens: Vec<Token> = tokenize(source.trim());
+    println!("{:?}", tokens);
+    let mut parser = Parser::new(tokens);
+    let ast = parser.parse();
+
+    println!("{:#?}", ast);
 }

@@ -1,55 +1,6 @@
 use std::{char, collections::HashMap};
 
-#[derive(Clone, Debug)]
-pub enum Token {
-    Symbol(Symbol),
-    Operator(Operator),
-    Keyword(Keyword),
-    Identifiers(String),
-    DataTypes(DataTypes),
-    Unknown(char),
-    EOF,
-}
-#[derive(Clone, Debug)]
-pub enum DataTypes {
-    Integer(i64),
-    Float(f64),
-    Boolean(bool),
-    Char(char),
-    String(String),
-}
-#[derive(Clone, Debug, Copy)]
-pub enum Symbol {
-    Semicolon,
-    LParen,
-    RParen,
-    Colon,
-}
-#[derive(Clone, Debug, Copy)]
-pub enum Operator {
-    Plus,
-    Minus,
-    Multiply,
-    Divide,
-    Equal,
-    DoubleEqual,
-    NotEqual,
-    Greater,
-    Less,
-    GreaterEqual,
-    LessEqual,
-    Increment,
-    Decrement,
-}
-#[derive(Clone, Debug, Copy)]
-pub enum Keyword {
-    Let,
-    Int,
-    Float,
-    Bool,
-    Char,
-    String,
-}
+use crate::token::{Token, DataTypes, Symbol, Operator, Keyword};
 
 pub struct Scanner<'a> {
     input: &'a str,
